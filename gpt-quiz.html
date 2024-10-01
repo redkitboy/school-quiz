@@ -45,6 +45,11 @@
             height: 300px; /* Resim yüksekliği */
             width: auto; /* Genişlikte kısıtlama yok */
         }
+		.score {
+            color: green; /* Yeşil renkli metin */
+            font-size: 24px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -58,6 +63,7 @@
             <button class="answer-button" id="answer4" onclick="checkAnswer(3)"></button>
         </div>
         <img class="question-picture" id="questionImage" src="" alt="Soru Resmi" />
+        <div class="score" id="scoreDisplay">0 puan</div> <!-- Puan metni eklendi -->
         <div id="gameOverMessage" class="game-over"></div>
     </div>
 
@@ -104,52 +110,74 @@
                 correctAnswer: "Mark",
                 options: ["Mark", "Riyal", "Drahmi", "Akçe"],
                 picUrl: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsymbolsage.com%2Fwp-content%2Fuploads%2F2020%2F08%2Fbrandenburg-gate-symbol-of-germany-2048x1366.jpg&f=1&nofb=1&ipt=4096596ae9ebd93f6fe5039d31efa2aea4910958f96b25659a2a9199f5a0e7c3&ipo=images"
+            },
+            {
+                question: "Aşağıdaki ülkelerden hangisinin Akdeniz'e sahili yoktur?",
+                correctAnswer: "Almanya",
+                options: ["İspanya", "Fransa", "İtalya", "Almanya"],
+                picUrl: "https://historyfangirl.com/wp-content/uploads/2020/06/shutterstock_1090496174.jpg"
             }
         ];
 
         let currentQuestionIndex = -1;
-        const usedQuestions = [];
+const usedQuestions = [];
+let score = 0; // Puan değişkeni
+let wrongAttempts = 0; // Yanlış cevap sayısı
 
-        function loadQuestion() {
-            if (usedQuestions.length === questions.length) {
-                document.getElementById("questionText").textContent = "Tebrikler, tüm soruları doğru cevapladınız!";
-                document.querySelector(".button-container").style.display = 'none';
-				document.querySelector(".question-picture").style.display = 'none';
-                return;
-            }
+function loadQuestion() {
+    if (usedQuestions.length === questions.length) {
+        document.getElementById("questionText").textContent = "Tebrikler, tüm soruları doğru cevapladınız!";
+        document.querySelector(".button-container").style.display = 'none';
+        document.querySelector(".question-picture").style.display = 'none';
+		
+        return;
+    }
 
-            let randomIndex;
-            do {
-                randomIndex = Math.floor(Math.random() * questions.length);
-            } while (usedQuestions.includes(randomIndex));
+    let randomIndex;
+    do {
+        randomIndex = Math.floor(Math.random() * questions.length);
+    } while (usedQuestions.includes(randomIndex));
 
-            usedQuestions.push(randomIndex);
-            currentQuestionIndex = randomIndex;
+    usedQuestions.push(randomIndex);
+    currentQuestionIndex = randomIndex;
 
-            const currentQuestion = questions[currentQuestionIndex];
-            document.getElementById("questionText").textContent = currentQuestion.question;
-            document.getElementById("questionImage").src = currentQuestion.picUrl; // Resmi güncelle
+    const currentQuestion = questions[currentQuestionIndex];
+    document.getElementById("questionText").textContent = currentQuestion.question;
+    document.getElementById("questionImage").src = currentQuestion.picUrl; // Resmi güncelle
 
-            const shuffledOptions = [...currentQuestion.options].sort(() => Math.random() - 0.5);
-            for (let i = 0; i < 4; i++) {
-                document.getElementById(`answer${i + 1}`).textContent = shuffledOptions[i];
-            }
+    const shuffledOptions = [...currentQuestion.options].sort(() => Math.random() - 0.5);
+    for (let i = 0; i < 4; i++) {
+        document.getElementById(`answer${i + 1}`).textContent = shuffledOptions[i];
+    }
+}
+
+function checkAnswer(selectedIndex) {
+    const currentQuestion = questions[currentQuestionIndex];
+    const selectedAnswer = document.getElementById(`answer${selectedIndex + 1}`).textContent;
+
+    if (selectedAnswer === currentQuestion.correctAnswer) {
+        score++; // Puanı artır
+        document.getElementById("scoreDisplay").textContent = score+ ' puan'; // Puan metnini güncelle
+		document.getElementById("gameOverMessage").style.display = 'none';
+        loadQuestion();  // Bir sonraki soruyu yükle
+    } else {
+        wrongAttempts++; // Yanlış cevabı artır
+        document.getElementById("gameOverMessage").textContent = `Yanlış cevap! Doğru cevap: ${currentQuestion.correctAnswer}. Bu son hakkın!`;
+		document.getElementById("gameOverMessage").style.display = 'block';
+
+        loadQuestion(); // Yanlış cevapta bir sonraki soruya geç
+        if (wrongAttempts >= 2) {
+            document.getElementById("gameOverMessage").textContent = "Yanlış cevap sayınız 2 oldu! Oyun bitti.";
+            document.querySelector(".button-container").style.display = 'none';
+            document.querySelector(".question-picture").style.display = 'none';
+            document.getElementById("questionText").style.display = 'none';
         }
+    }
+}
 
-        function checkAnswer(selectedIndex) {
-            const currentQuestion = questions[currentQuestionIndex];
-            const selectedAnswer = document.getElementById(`answer${selectedIndex + 1}`).textContent;
+// İlk soruyu yükle
+loadQuestion();
 
-            if (selectedAnswer === currentQuestion.correctAnswer) {
-                loadQuestion();  // Bir sonraki soruyu yükle
-            } else {
-                document.getElementById("gameOverMessage").textContent = "Yanlış cevap! Oyun Bitti.";
-                document.querySelector(".button-container").style.display = 'none';
-            }
-        }
-
-        // İlk soruyu yükle
-        loadQuestion();
     </script>
 
 </body>
