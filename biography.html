@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soru Cevap Oyunu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #DDDDDD;
+            text-align: center;
+            margin: 0;
+            padding-top: 140px;
+        }
+        .question {
+            font-size: 32px; /* Soru metni boyutu */
+            margin-bottom: 20px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px; /* Butonlar ve resim arasında boşluk */
+        }
+        .answer-button {
+            background-color: #000080;
+            color: white;
+            border: none;
+            padding: 15px 30px; /* Buton iç boşlukları */
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 20px; /* Buton metin boyutu */
+        }
+        .answer-button:hover {
+            background-color: #002D80;
+        }
+        .game-over {
+            color: red;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .question-picture {
+            margin-top: 20px;
+            height: 300px; /* Resim yüksekliği */
+            width: auto; /* Genişlikte kısıtlama yok */
+        }
+		.score {
+            color: green; /* Yeşil renkli metin */
+            font-size: 24px;
+            margin-top: 10px;
+        }
+        
+        
+        @media (max-width: 900px) {
+    .answer-button {
+        padding: 10px 20px; /* Yükseklik ve genişlik azaltıldı */
+        font-size: 16px; /* Yazı tipi boyutu küçültüldü */
+    }
+
+    .question {
+        font-size: 24px; /* Soru metni boyutu da küçültüldü */
+    }
+
+    .question-picture {
+        height: 200px; /* Resim yüksekliği küçültüldü */
+    }
+            
+    #gameOverMessage{
+        font-size: 16px;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <div id="game">
+        <div class="question" id="questionText"></div>
+        <div class="button-container">
+            <button class="answer-button" id="answer1" onclick="checkAnswer(0)"></button>
+            <button class="answer-button" id="answer2" onclick="checkAnswer(1)"></button>
+            <button class="answer-button" id="answer3" onclick="checkAnswer(2)"></button>
+            <button class="answer-button" id="answer4" onclick="checkAnswer(3)"></button>
+        </div>
+        <img class="question-picture" id="questionImage" src="" alt="Soru Resmi" />
+        <div class="score" id="scoreDisplay">0 puan</div> <!-- Puan metni eklendi -->
+        <div id="gameOverMessage" class="game-over"></div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Donald ...... born in 2012. ",
+                correctAnswer: "was",
+                options: ["am", "are", "was", "had"],
+                picUrl: "img/trns.png"
+            },
+            {
+                question: "Ayşe ...... born in 2010.",
+               correctAnswer: "was",
+                options: ["am", "are", "was", "had"],
+                picUrl: "img/trns.png"
+            },
+            {
+                question: "Fırat ...... born in Saratlı.",
+               correctAnswer: "was",
+                options: ["am", "are", "was", "had"],
+                picUrl: "img/trns.png"
+            },
+            {
+                question: "Graham Bell ......... the phone.",
+                correctAnswer: "invented",
+                options: ["invented", "died", "played", "walked"],
+                picUrl: "https://m.media-amazon.com/images/I/71Zc7Kfn+1L._AC_SX679_.jpg"
+            },
+            {
+                question: "Sabahattin Ali ........ the book 'Kuyucaklı Yusuf' in 1937.",
+                correctAnswer: "wrote",
+                options: ["wrote", "played", "ate", "drank"],
+                picUrl: "img/yusuf.png"
+            },
+            {
+                question: "Kate and Jack ........ on Sunday.",
+                correctAnswer: "got married",
+                options: ["got married", "went", "graduated", "died"],
+                picUrl: "https://media.consumeraffairs.com/files/cache/news/wedding_medium.jpg"
+            },
+            {
+                question: "ATE fiilinin yalın hali hangisidir?",
+                correctAnswer: "eat",
+                options: ["eat", "drink", "go", "invent"],
+                picUrl: "https://img.freepik.com/free-vector/kid-girl-eat-illustration_97632-155.jpg?size=338&ext=jpg"
+            },
+            {
+                question: "WROTE fiilinin yalın hali hangisidir?",
+                correctAnswer: "write",
+                options: ["write", "read", "die", "play"],
+                picUrl: "https://pathwayheart.com/wp-content/uploads/2013/08/writing-a-letter.jpg"
+            },
+            {
+                question: "MADE fiilinin yalın hali hangisidir?",
+                correctAnswer: "make",
+                options: ["make", "read", "understand", "play"],
+                picUrl: "img/trns.png"
+            },
+            {
+                question: "WON fiilinin yalın hali hangisidir?",
+                correctAnswer: "win",
+                options: ["win", "lose", "go", "drink"],
+                picUrl: "img/trns.png"
+            },
+            {
+                question: "DRANK fiilinin yalın hali hangisidir?",
+                correctAnswer: "drink",
+                options: ["drink", "make", "die", "get"],
+                picUrl: "https://kineticosa.com/wp-content/uploads/2012/07/DenaDrinkLargerBkgd-1536x784-c-default-768x392-c-default.jpg"
+            },
+            {
+                question: "Jack ......... from university last year.",
+                correctAnswer: "graduated",
+                options: ["graduated", "wrote", "work", "understand"],
+                picUrl: "https://cdn-jehol.nitrocdn.com/XBwbYFbRYVMjkUYSoaVcGgRdcPyjhKvO/assets/images/optimized/rev-2609c0c/www.acstechnologies.com/church-growth/wp-content/uploads/sites/5/2020/06/Graduate_06.20_Blog_Image_Resize.jpg"
+            },
+            {
+                question: "Barış Manço ........ a red car.",
+                correctAnswer: "had",
+                options: ["had", "started", "finished", "graduated"],
+                picUrl: "img/manco.png"
+            }
+        ];
+
+        let currentQuestionIndex = -1;
+const usedQuestions = [];
+let score = 0; // Puan değişkeni
+let wrongAttempts = 0; // Yanlış cevap sayısı
+
+function loadQuestion() {
+    if (usedQuestions.length === questions.length) {
+        document.getElementById("questionText").textContent = `Tebrikler, oyunu tamamladınız! Skor: ${score} / ${questions.length}`;
+        document.querySelector(".button-container").style.display = 'none';
+        document.querySelector(".question-picture").style.display = 'none';
+        document.getElementById("scoreDisplay").style.display = 'none';
+
+		
+        return;
+    }
+
+    let randomIndex;
+    do {
+        randomIndex = Math.floor(Math.random() * questions.length);
+    } while (usedQuestions.includes(randomIndex));
+
+    usedQuestions.push(randomIndex);
+    currentQuestionIndex = randomIndex;
+
+    const currentQuestion = questions[currentQuestionIndex];
+    document.getElementById("questionText").textContent = currentQuestion.question;
+    document.getElementById("questionImage").src = currentQuestion.picUrl; // Resmi güncelle
+
+    const shuffledOptions = [...currentQuestion.options].sort(() => Math.random() - 0.5);
+    for (let i = 0; i < 4; i++) {
+        document.getElementById(`answer${i + 1}`).textContent = shuffledOptions[i];
+    }
+}
+
+async function checkAnswer(selectedIndex) {
+    const currentQuestion = questions[currentQuestionIndex];
+    const selectedAnswer = document.getElementById(`answer${selectedIndex + 1}`).textContent;
+
+    if (selectedAnswer === currentQuestion.correctAnswer) { // DOĞRU CEVAP DURUMUNDA
+        score++; // Puanı artır
+        document.getElementById("scoreDisplay").textContent = score+ '/' + questions.length + ' puan'; // Puan metnini güncelle
+		document.getElementById("gameOverMessage").style.display = 'none';
+        loadQuestion();  // Bir sonraki soruyu yükle
+    } else { // YANLIŞ CEVAP DURUMUNDA
+        wrongAttempts++; // Yanlış cevabı artır
+        document.getElementById("gameOverMessage").textContent = `Yanlış cevap! Doğru cevap: ${currentQuestion.correctAnswer}. Bu son hakkın!`;
+		document.getElementById("gameOverMessage").style.display = 'block';
+        
+        const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+        await wait(500); // 200 ms bekler
+
+        loadQuestion(); // Yanlış cevapta bir sonraki soruya geç
+        if (wrongAttempts >= 2) {
+            document.getElementById("gameOverMessage").textContent = "Yanlış cevap sayınız 2 oldu! Oyun bitti.";
+            document.querySelector(".button-container").style.display = 'none';
+            document.querySelector(".question-picture").style.display = 'none';
+            document.getElementById("questionText").style.display = 'none';
+        }
+    }
+}
+
+// İlk soruyu yükle
+loadQuestion();
+
+    </script>
+
+</body>
+</html>
