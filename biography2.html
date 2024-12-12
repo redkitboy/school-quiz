@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -21,13 +20,13 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 20px; /* Butonlar ve resim arasýnda boþluk */
+            margin-bottom: 20px; /* Butonlar ve resim arasında boşluk */
         }
         .answer-button {
             background-color: #000080;
             color: white;
             border: none;
-            padding: 15px 30px; /* Buton iç boþluklarý */
+            padding: 15px 30px; /* Buton iç boşlukları */
             margin: 10px;
             cursor: pointer;
             border-radius: 5px;
@@ -43,11 +42,11 @@
         }
         .question-picture {
             margin-top: 20px;
-            height: 300px; /* Resim yüksekliði */
-            width: auto; /* Geniþlikte kýsýtlama yok */
+            height: 300px; /* Resim yüksekliği */
+            width: auto; /* Genişlikte kısıtlama yok */
         }
 		.score {
-            color: green; /* Yeþil renkli metin */
+            color: green; /* Yeşil renkli metin */
             font-size: 24px;
             margin-top: 10px;
         }
@@ -55,7 +54,7 @@
         
         @media (max-width: 900px) {
     .answer-button {
-        padding: 10px 20px; /* Yükseklik ve genişlik azaltıldý */
+        padding: 10px 20px; /* Yükseklik ve genişlik azaltıldı */
         font-size: 16px; /* Yazı tipi boyutu küçültüldü */
     }
 
@@ -64,7 +63,7 @@
     }
 
     .question-picture {
-        height: 200px; /* Resim yüksekliði küçültüldü */
+        height: 200px; /* Resim yüksekliği küçültüldü */
     }
             
     #gameOverMessage{
@@ -92,89 +91,89 @@
     <script>
         const questions = [
             {
-                question: "Hangisi geçmiş zamanda geçmektedir? ",
+                question: "Hangisi geçmiş zamanda geçmektedir?",
                 correctAnswer: "went",
-                options: ["went", "go", "going", "goes"],
-                picUrl: "http://www.justysproduce.com/images/red_20onion.jpg"
-            },
-            {
-                question: "What is this",
-               correctAnswer: "knife",
-                options: ["knife", "fork", "pan", "kitchen"],
-                picUrl: "https://www.seriouseats.com/thmb/owyNLK-WUQT70Tb_MJTK7qkR1nw=/fit-in/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Tojiro-F-737-Bread-Slicer-3ce8dc7d54874fe9bb8a763c70505c7a.jpg"
-            },
-            {
-                question: "Dice the .......",
-               correctAnswer: "potatoes",
-                options: ["potatoes", "kitchen", "pan", "knife"],
+                options: ["went", "go", "goes", "going"],
                 picUrl: "img/trns.png"
             },
             {
-                question: "..... the ingredients in a bowl.",
-                correctAnswer: "mix",
-                options: ["mix", "boil", "cook", "fry"],
+                question: "Hangisi geçmiş zamanda geçmektedir?",
+               correctAnswer: "played",
+                options: ["played", "play", "plays", "playing"],
                 picUrl: "img/trns.png"
             },
             {
-                question: "..... the potatoes on a pan.",
-                correctAnswer: "fry",
-                options: ["fry", "grill", "boil", "pour"],
+                question: "Hangisi geçmiş zamanda geçmektedir?",
+               correctAnswer: "invented",
+                options: ["invented", "invent", "invents", "inventing"],
                 picUrl: "img/trns.png"
             },
             {
-                question: "What is this.",
-                correctAnswer: "spoon",
-                options: ["spoon", "fork", "sauce pan", "table"],
-                picUrl: "https://cpimg.tistatic.com/07471684/b/4/Baby-Spoon.jpg"
+                question: "Okuldan sonra eve gitti.",
+                correctAnswer: "He went home after school.",
+                options: ["He went home after school.", "He ate the toast", "He drank the tea.", "He bought a pencil."],
+                picUrl: "https://static.vecteezy.com/system/resources/previews/020/438/476/original/children-returning-home-from-school-vector.jpg"
             },
             {
-                question: "put the tomatoes on the pan after ........ it.",
-                correctAnswer: "slicing",
-                options: ["slicing", "cooking", "pouring", "boiling"],
+                question: "Kitabı doksan yıl önce yazdı.",
+                correctAnswer: "He wrote the book ninety years ago.",
+                options: ["He wrote the book ninety years ago.", "He started the game yesterday.", "I graduated from university.", "I drank tea"],
+                picUrl: "img/yusuf.png"
+            },
+            {
+                question: "On gün önce",
+                correctAnswer: "ten days ago",  
+                options: ["ten days ago", "ten weeks ago", "two months ago", "yesterday"],
                 picUrl: "img/trns.png"
             },
             {
-                question: "Which step is number 1?",
-                correctAnswer: "first",
-                options: ["first", "second", "next", "finally"],
+                question: ' "Dün" kelimesinin karşılığı hangisidir?',
+                correctAnswer: "yesterday",
+                options: ["yesterday", "tomorrow", "last week", "ten days ago"],
                 picUrl: "img/trns.png"
             },
             {
-                question: "Serve the .... after cooling it.",
-                correctAnswer: "pudding",
-                options: ["pudding", "soup", "chicken", "french fries"],
+                question: "Geçmiş zamandaki yazılışları gösterilen bu kelimelerden hangisi düzensiz(kuralsız) fiildir?",
+                correctAnswer: "wrote",
+                options: ["wrote", "played", "finished", "prepared"],
                 picUrl: "img/trns.png"
             },
             {
-                question: "Which of the following is preferred during a picnic?",
-                correctAnswer: "grilling",
-                options: ["grilling", "frying", "boiling", "baking"],
-                picUrl: "https://storage.googleapis.com/yorumsepeti/img/acan-krom-mangal-tuplu-cift-izgarali-barbeku-firinli-katlanir-ayakli-mangal-seti.jpg"
+                question: "Geçmiş zamandaki yazılışları gösterilen bu kelimelerden hangisi düzensiz(kuralsız) fiildir?",
+                correctAnswer: "ran",
+                options: ["ran", "invented", "tried", "walked"],
+                picUrl: "img/trns.png"
             },
             {
-                question: "What is this?",
-                correctAnswer: "fruit juice",
-                options: ["fruit juice", "water", "mineral water", "jam"],
-                picUrl: "https://www.dynamicgreens.com/app/uploads/2014/11/orange-juice.png"
+                question: "SAID fiilinin yalın hali hangisidir?",
+                correctAnswer: "say",
+                options: ["say", "try", "go", "invent"],
+                picUrl: "img/trns.png"
             },
             {
-                question: "What is this?",
-                correctAnswer: "garlic",
-                options: ["garlic", "tomatoes", "cherry", "cucumber"],
-                picUrl: "https://emojigraph.org/media/apple/garlic_1f9c4.png"
+                question: "thought fiilinin yalın hali hangisidir?",
+                correctAnswer: "think",
+                options: ["think", "try", "die", "understand"],
+                picUrl: "https://cdn.langeek.co/photo/21228/original/?type=jpeg"
             },
             {
-                question: "Cupcake ingredients: sugar, vanilla, baking powder, ......, oil and eggs",
-                correctAnswer: "milk",
-                options: ["milk", "cucumber", "potatoes", "garlic"],
-                picUrl: "https://www.pngall.com/wp-content/uploads/5/Yummy-Cupcake-PNG.png"
+                question: "Jack ......... the homework.",
+                correctAnswer: "finished",
+                options: ["finished", "ran", "played", "bought"],
+                picUrl: "https://c7.alamy.com/comp/2BF972H/happy-little-boy-with-his-homework-done-at-table-2BF972H.jpg"
+            },
+            {
+                question: "Atatürk ........ a black car.",
+                correctAnswer: "had",
+                options: ["had", "understood", "finished", "graduated"],
+                picUrl: "https://cdn.motor1.com/images/mgl/RGvXA/s4/ulu-onderin-mercedes-i.webp"
             }
         ];
 
         let currentQuestionIndex = -1;
 const usedQuestions = [];
-let score = 0; // Puan deðiþkeni
-let wrongAttempts = 0; // Yanlýþ cevap sayýsý
+let score = 0; // Puan değişkeni
+let wrongAttempts = 0; // Yanlış cevap sayısı
 
 function loadQuestion() {
     if (usedQuestions.length === questions.length) {
@@ -209,13 +208,13 @@ async function checkAnswer(selectedIndex) {
     const currentQuestion = questions[currentQuestionIndex];
     const selectedAnswer = document.getElementById(`answer${selectedIndex + 1}`).textContent;
 
-    if (selectedAnswer === currentQuestion.correctAnswer) { // DOÐRU CEVAP DURUMUNDA
-        score++; // Puaný artýr
+    if (selectedAnswer === currentQuestion.correctAnswer) { // DOĞRU CEVAP DURUMUNDA
+        score++; // Puanı artır
         document.getElementById("scoreDisplay").textContent = score+ '/' + questions.length + ' puan'; // Puan metnini güncelle
 		document.getElementById("gameOverMessage").style.display = 'none';
         loadQuestion();  // Bir sonraki soruyu yükle
-    } else { // YANLIÞ CEVAP DURUMUNDA
-        wrongAttempts++; // Yanlýþ cevabý artýr
+    } else { // YANLIŞ CEVAP DURUMUNDA
+        wrongAttempts++; // Yanlış cevabı artır
         document.getElementById("gameOverMessage").textContent = `Yanlış cevap! Doğru cevap: ${currentQuestion.correctAnswer}. Bu son hakkın!`;
 		document.getElementById("gameOverMessage").style.display = 'block';
         
@@ -232,7 +231,7 @@ async function checkAnswer(selectedIndex) {
     }
 }
 
-// Ýlk soruyu yükle
+// İlk soruyu yükle
 loadQuestion();
 
     </script>
